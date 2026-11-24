@@ -4,158 +4,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#101b3d">
 
-    <title>Grammar Practice | Grammar Hub</title>
+    <title>Grammar Practice | GrammarHub</title>
 
     <link rel="stylesheet" href="css/style.css">
 
     <style>
+        body {
+            background: #f4f6fb;
+            color: #17213c;
+        }
+
         .practice-container {
-            max-width: 850px;
-            margin: 60px auto;
-            padding: 30px 20px;
+            width: min(900px, 92%);
+            margin: 40px auto;
         }
 
         .practice-header {
-            text-align: center;
-            margin-bottom: 35px;
+            background: linear-gradient(135deg, #101b3d, #2456b5);
+            color: white;
+            padding: 30px;
+            border-radius: 18px;
+            margin-bottom: 25px;
         }
 
         .practice-header h1 {
-            font-size: 36px;
-            margin-bottom: 10px;
+            margin: 0 0 10px;
+            font-size: 30px;
         }
 
         .practice-header p {
-            color: #526078;
+            margin: 0;
+            color: #dce6ff;
         }
 
-        .practice-info {
+        .practice-stats {
             display: flex;
             justify-content: space-between;
             gap: 15px;
+            margin-top: 25px;
             flex-wrap: wrap;
-            margin-bottom: 15px;
-            font-weight: 600;
+        }
+
+        .stat {
+            background: rgba(255,255,255,.13);
+            padding: 12px 18px;
+            border-radius: 10px;
+        }
+
+        .practice-card {
+            background: white;
+            padding: 28px;
+            border-radius: 16px;
+            box-shadow: 0 5px 25px rgba(20,35,70,.07);
+            margin-bottom: 22px;
         }
 
         .progress-track {
             width: 100%;
             height: 9px;
-            background: #e7eaf2;
+            background: #e7ebf4;
             border-radius: 20px;
             overflow: hidden;
-            margin-bottom: 30px;
+            margin: 18px 0;
         }
 
         .progress-fill {
-            width: 0%;
             height: 100%;
-            background: #315efb;
-            transition: width 0.3s;
+            width: 0%;
+            background: #3867e8;
+            transition: width .3s ease;
         }
 
-        .question-card {
-            background: white;
-            padding: 30px;
-            border: 1px solid #e7eaf2;
-            border-radius: 16px;
-            box-shadow: 0 8px 25px #14213d0a;
+        .question-meta {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            color: #64708b;
+            font-size: 14px;
+            flex-wrap: wrap;
         }
 
-        .question-card h2 {
-            font-size: 23px;
-            margin-bottom: 25px;
+        #questionText {
+            font-size: 21px;
+            line-height: 1.6;
+            margin: 25px 0;
         }
 
         .answer-options {
             display: grid;
-            gap: 13px;
+            gap: 12px;
         }
 
-        .answer-option {
-            padding: 16px;
-            border: 1px solid #e7eaf2;
-            border-radius: 10px;
-            background: white;
-            cursor: pointer;
+        .answer-options button {
             text-align: left;
-            transition: 0.2s;
-        }
-
-        .answer-option:hover {
-            border-color: #315efb;
-            background: #f5f7ff;
-        }
-
-        .answer-option.selected {
-            border: 2px solid #315efb;
-            background: #edf1ff;
-        }
-
-        .answer-option.correct {
-            border: 2px solid #16a34a;
-            background: #f0fdf4;
-        }
-
-        .answer-option.wrong {
-            border: 2px solid #dc2626;
-            background: #fef2f2;
-        }
-
-        .feedback {
-            margin-top: 22px;
-            padding: 15px;
+            padding: 15px 18px;
+            border: 1px solid #dce2ef;
+            background: white;
             border-radius: 10px;
-            display: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: #17213c;
+            transition: .2s;
         }
 
-        .feedback.show {
-            display: block;
+        .answer-options button:hover {
+            border-color: #3867e8;
+            background: #f3f6ff;
+        }
+
+        .answer-options button.selected {
+            border: 2px solid #3867e8;
+            background: #edf2ff;
+        }
+
+        .answer-options button.correct {
+            border-color: #15965a;
+            background: #e9f9f0;
+        }
+
+        .answer-options button.wrong {
+            border-color: #dc4545;
+            background: #fff0f0;
         }
 
         .practice-actions {
             display: flex;
-            justify-content: space-between;
             gap: 12px;
-            flex-wrap: wrap;
             margin-top: 25px;
+            flex-wrap: wrap;
         }
 
         .practice-button {
             border: none;
+            background: #2456d8;
+            color: white;
             padding: 13px 23px;
             border-radius: 9px;
-            background: #315efb;
-            color: white;
-            font-weight: 700;
             cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
         }
 
-        .practice-button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
+        .practice-button:hover {
+            background: #173fae;
         }
 
-        .result-card {
+        .secondary-button {
+            background: #e9edf6;
+            color: #17213c;
+        }
+
+        .secondary-button:hover {
+            background: #dce3f2;
+        }
+
+        .feedback {
+            margin-top: 20px;
+            padding: 16px;
+            border-radius: 10px;
+            display: none;
+            line-height: 1.6;
+        }
+
+        .feedback.correct {
+            display: block;
+            background: #e9f9f0;
+            color: #116b40;
+        }
+
+        .feedback.wrong {
+            display: block;
+            background: #fff0f0;
+            color: #a52e2e;
+        }
+
+        #resultCard {
             display: none;
             text-align: center;
-            padding: 35px;
-            background: #f5f7ff;
-            border-radius: 15px;
         }
 
-        .result-card.show {
+        #resultCard.show {
             display: block;
         }
 
+        .result-score {
+            font-size: 48px;
+            color: #2456d8;
+            font-weight: 800;
+            margin: 20px 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #2456d8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
         @media(max-width: 600px) {
-            .practice-header h1 {
-                font-size: 28px;
+            .practice-header {
+                padding: 23px;
             }
 
-            .question-card {
+            .practice-header h1 {
+                font-size: 25px;
+            }
+
+            .practice-card {
                 padding: 20px;
+            }
+
+            #questionText {
+                font-size: 18px;
+            }
+
+            .practice-button {
+                width: 100%;
             }
         }
     </style>
@@ -164,86 +235,153 @@
 <body>
 
     <header class="navbar">
-        <a href="index.html" class="logo">GrammarHub.</a>
+        <div class="container">
+            <a href="index.html" class="logo">Grammar<span>Hub</span></a>
 
-        <nav class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="index.html#topics">Topics</a>
-        </nav>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="index.html#topics">Topics</a>
+            </nav>
+        </div>
     </header>
 
     <main class="practice-container">
 
-        <div class="practice-header">
+        <a href="index.html" class="back-link">
+            ← Back to All Topics
+        </a>
+
+        <section class="practice-header">
             <h1 id="topicTitle">Grammar Practice</h1>
+
             <p id="topicDescription">
-                Test your understanding and improve your grammar.
+                Revise the topic and test your grammar knowledge.
             </p>
-        </div>
 
-        <div class="practice-info">
-            <span id="questionNumber">Question 1</span>
-            <span id="scoreDisplay">Score: 0</span>
-        </div>
+            <div class="practice-stats">
+                <div class="stat">
+                    Question: <strong id="questionNumber">0 / 0</strong>
+                </div>
 
-        <div class="progress-track">
-            <div class="progress-fill" id="progressFill"></div>
-        </div>
-<section id="lessonSection" class="question-card">
-    <h2>Revise Before You Practise</h2>
-    <div id="lessonContent"></div>
-    <button class="practice-button" id="startPractice">
-        Start Practising →
-    </button>
-</section>
-        <section class="question-card" id="questionCard">
+                <div class="stat">
+                    Score: <strong id="scoreDisplay">0</strong>
+                </div>
+            </div>
+        </section>
 
-            <h2 id="questionText">Loading question...</h2>
+        <!-- REVISION SECTION -->
 
-            <div class="answer-options" id="answerOptions"></div>
+        <section id="lessonSection" class="practice-card">
+            <h2>Revise Before You Practise</h2>
 
-            <div class="feedback" id="feedback"></div>
+            <div id="lessonContent">
+                Loading revision notes...
+            </div>
+
+            <button
+                class="practice-button"
+                id="startPractice"
+                type="button">
+                Start Practising →
+            </button>
+        </section>
+
+        <!-- QUESTION SECTION -->
+
+        <section id="questionCard" class="practice-card">
+
+            <div class="question-meta">
+                <span id="questionNumberLabel">Question 1</span>
+                <span id="difficultyLabel">Practice</span>
+            </div>
+
+            <div class="progress-track">
+                <div id="progressFill" class="progress-fill"></div>
+            </div>
+
+            <h2 id="questionText">
+                Your question will appear here.
+            </h2>
+
+            <div id="answerOptions" class="answer-options">
+                <!-- Options are added by JavaScript -->
+            </div>
+
+            <div id="feedback" class="feedback"></div>
 
             <div class="practice-actions">
-                <button class="practice-button" id="checkButton">
+
+                <button
+                    id="checkButton"
+                    class="practice-button"
+                    type="button">
                     Check Answer
                 </button>
 
-                <button class="practice-button" id="nextButton" disabled>
+                <button
+                    id="nextButton"
+                    class="practice-button"
+                    type="button"
+                    style="display:none;">
                     Next Question →
                 </button>
+
             </div>
 
         </section>
 
-        <section class="result-card" id="resultCard">
+        <!-- RESULT SECTION -->
+
+        <section id="resultCard" class="practice-card">
 
             <h2>Practice Completed!</h2>
 
-            <h1 id="finalScore">0 / 0</h1>
+            <p>Your final score is:</p>
 
-            <p id="resultMessage"></p>
+            <div class="result-score" id="finalScore">
+                0
+            </div>
 
-            <br>
+            <h3 id="resultMessage">
+                Good effort!
+            </h3>
 
-            <button class="practice-button" onclick="location.reload()">
-                Practise Again
-            </button>
+            <p>
+                Keep practising to improve your grammar skills.
+            </p>
 
-            <a href="index.html" class="btn btn-outline">
-                Back to Topics
-            </a>
+            <div class="practice-actions"
+                 style="justify-content:center;">
+
+                <button
+                    class="practice-button"
+                    onclick="location.reload()"
+                    type="button">
+                    Practise Again
+                </button>
+
+                <a href="index.html"
+                   class="practice-button secondary-button"
+                   style="text-decoration:none;">
+                    Explore Topics
+                </a>
+
+            </div>
 
         </section>
 
     </main>
 
     <footer class="footer">
-        <p>© 2026 Grammar Hub. Learn English. Improve Every Day.</p>
+        <div class="container">
+            <p>© 2026 GrammarHub. Learn Grammar. Practise. Improve.</p>
+        </div>
     </footer>
 
-   <script src="js/lessons.js"></script>
-<script src="js/practice.js"></script>
+    <!-- KEEP THESE SCRIPT FILES IN THIS ORDER -->
+
+    <script src="js/lessons.js"></script>
+    <script src="js/practice.js"></script>
 
 </body>
 </html>
