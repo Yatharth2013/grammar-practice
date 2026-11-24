@@ -346,6 +346,40 @@ function showResults() {
 
 // Start practice
 
-displayQuestion();
+// ==========================================
+// REVISION + PRACTICE INTEGRATION
+// ==========================================
+
+const lessonSection = document.getElementById("lessonSection");
+const lessonContent = document.getElementById("lessonContent");
+const startPracticeButton = document.getElementById("startPractice");
+
+// Display revision notes
+
+if (typeof displayLesson === "function") {
+    lessonContent.innerHTML = displayLesson(selectedTopic);
+}
+
+// Hide quiz initially
+
+questionCard.style.display = "none";
+resultCard.classList.remove("show");
+
+// Start quiz after revision
+
+startPracticeButton.addEventListener("click", () => {
+
+    lessonSection.style.display = "none";
+    questionCard.style.display = "block";
+
+    displayQuestion();
+
+});
+
+// Start with revision
+
+lessonSection.style.display = "block";
+
+console.log("Revision and Practice System Ready");
 
 console.log("Grammar Hub Practice Engine Loaded");
