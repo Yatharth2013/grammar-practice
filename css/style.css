@@ -331,3 +331,57 @@ button, input {
         font-size: 28px;
     }
 }
+
+/* =================================
+   GRAMMAR REVISION SECTION
+================================= */
+
+.lesson-content {
+    margin-top: 20px;
+}
+
+.lesson-content > p {
+    color: #526078;
+    margin: 12px 0 25px;
+    line-height: 1.8;
+}
+
+.lesson-rules {
+    display: grid;
+    gap: 16px;
+    margin-bottom: 25px;
+}
+
+.lesson-rule {
+    padding: 20px;
+    background: #f5f7ff;
+    border: 1px solid #e7eaf2;
+    border-radius: 12px;
+}
+
+.lesson-rule h3 {
+    color: #315efb;
+    margin-bottom: 8px;
+    font-size: 17px;
+}
+
+.lesson-rule p {
+    color: #526078;
+    margin-bottom: 12px;
+}
+
+.lesson-example {
+    background: white;
+    padding: 12px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #14213d;
+}
+
+#lessonSection {
+    margin-bottom: 25px;
+}
+
+#startPractice {
+    margin-top: 15px;
+}
