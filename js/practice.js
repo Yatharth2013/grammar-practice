@@ -1,128 +1,12 @@
-
 // ==========================================
-// GRAMMAR HUB - PRACTICE ENGINE
+// GRAMMAR HUB - PRACTICE SYSTEM
 // ==========================================
 
-// Get topic from URL
-
+// Get the selected topic from the URL
 const urlParams = new URLSearchParams(window.location.search);
-
 const selectedTopic = urlParams.get("topic") || "Parts of Speech";
 
-
-// Question database - Initial questions
-
-const questionDatabase = {
-
-    "Parts of Speech": [
-        {
-            question: "Identify the noun in this sentence: 'The boy is playing.'",
-            options: ["The", "Boy", "Is", "Playing"],
-            answer: "Boy",
-            explanation: "Boy is a noun because it names a person."
-        },
-        {
-            question: "Which part of speech describes a noun?",
-            options: ["Verb", "Adverb", "Adjective", "Conjunction"],
-            answer: "Adjective",
-            explanation: "An adjective describes a noun or pronoun."
-        },
-        {
-            question: "Identify the verb: 'She sings beautifully.'",
-            options: ["She", "Sings", "Beautifully", "None"],
-            answer: "Sings",
-            explanation: "Sings is a verb because it expresses an action."
-        },
-        {
-            question: "Which word is a pronoun?",
-            options: ["School", "Quickly", "They", "Beautiful"],
-            answer: "They",
-            explanation: "They is a pronoun used in place of a noun."
-        },
-        {
-            question: "Identify the adverb: 'He runs quickly.'",
-            options: ["He", "Runs", "Quickly", "None"],
-            answer: "Quickly",
-            explanation: "Quickly describes how he runs, so it is an adverb."
-        }
-    ],
-
-    "Nouns": [
-        {
-            question: "Which of these is a proper noun?",
-            options: ["City", "Boy", "India", "Country"],
-            answer: "India",
-            explanation: "India is the specific name of a country."
-        },
-        {
-            question: "What is the plural of 'child'?",
-            options: ["Childs", "Children", "Childes", "Childrens"],
-            answer: "Children",
-            explanation: "Children is the irregular plural of child."
-        },
-        {
-            question: "Identify the collective noun.",
-            options: ["Team", "Player", "Ball", "Game"],
-            answer: "Team",
-            explanation: "Team refers to a collection of players."
-        }
-    ],
-
-    "Pronouns": [
-        {
-            question: "Choose the correct pronoun: 'Riya is absent because ___ is ill.'",
-            options: ["He", "She", "They", "We"],
-            answer: "She",
-            explanation: "She is the correct pronoun for Riya."
-        },
-        {
-            question: "Which is a reflexive pronoun?",
-            options: ["Myself", "My", "Me", "I"],
-            answer: "Myself",
-            explanation: "Myself is a reflexive pronoun."
-        }
-    ],
-
-    "Adjectives": [
-        {
-            question: "Identify the adjective: 'It is a beautiful flower.'",
-            options: ["It", "Is", "Beautiful", "Flower"],
-            answer: "Beautiful",
-            explanation: "Beautiful describes the noun flower."
-        },
-        {
-            question: "What is the comparative form of 'good'?",
-            options: ["Gooder", "Best", "Better", "More good"],
-            answer: "Better",
-            explanation: "Better is the comparative form of good."
-        }
-    ],
-
-    "Simple Tenses": [
-        {
-            question: "Choose the correct verb: 'She ___ to school every day.'",
-            options: ["Go", "Goes", "Going", "Gone"],
-            answer: "Goes",
-            explanation: "In the simple present, we use goes with she."
-        },
-        {
-            question: "Which sentence is in the simple past tense?",
-            options: [
-                "I play cricket.",
-                "I am playing cricket.",
-                "I played cricket.",
-                "I will play cricket."
-            ],
-            answer: "I played cricket.",
-            explanation: "Played expresses a completed past action."
-        }
-    ]
-
-};
-
-
-// Get HTML elements
-
+// Page elements
 const topicTitle = document.getElementById("topicTitle");
 const topicDescription = document.getElementById("topicDescription");
 const questionNumber = document.getElementById("questionNumber");
@@ -138,185 +22,316 @@ const resultCard = document.getElementById("resultCard");
 const finalScore = document.getElementById("finalScore");
 const resultMessage = document.getElementById("resultMessage");
 
+const lessonSection = document.getElementById("lessonSection");
+const lessonContent = document.getElementById("lessonContent");
+const startPracticeButton = document.getElementById("startPractice");
 
-// Practice state
+// ==========================================
+// QUESTION BANK
+// Format:
+// [question, options, correctAnswerIndex, explanation, difficulty]
+// ==========================================
 
-let questions = questionDatabase[selectedTopic] || [
-    {
-        question: "Questions for this topic are coming soon. Please choose another topic.",
-        options: ["Continue", "Return Home"],
-        answer: "Continue",
-        explanation: "We are building the question bank for this topic."
-    }
-];
+const questionBank = {
 
+"Parts of Speech": [
+["Identify the part of speech of the underlined word: She sings beautifully.", ["Noun", "Adverb", "Adjective", "Verb"], 1, "Beautifully describes how she sings. It is an adverb.", "Easy"],
+["Identify the part of speech of 'although' in: Although it was raining, we played.", ["Preposition", "Conjunction", "Adverb", "Pronoun"], 1, "Although connects two clauses and is a subordinating conjunction.", "Exam-type"]
+],
+
+"Nouns": [
+["Which of the following is an abstract noun?", ["Table", "Honesty", "Teacher", "Garden"], 1, "Honesty is an abstract noun because it names a quality.", "Easy"],
+["Choose the correctly formed plural of 'analysis'.", ["Analysises", "Analysiseses", "Analyses", "Analysis"], 2, "The plural of analysis is analyses.", "Hard"]
+],
+
+"Pronouns": [
+["Choose the correct pronoun: Riya and ___ went to the library.", ["me", "I", "mine", "myself"], 1, "I is the subject pronoun used as part of the subject.", "Easy"],
+["Identify the relative pronoun: The boy who won the race is my friend.", ["The", "Boy", "Who", "My"], 2, "Who introduces the relative clause and refers to the boy.", "Medium"]
+],
+
+"Adjectives": [
+["Choose the adjective in: The clever student solved the puzzle.", ["Student", "Solved", "Clever", "Puzzle"], 2, "Clever describes the noun student.", "Easy"],
+["Choose the correct comparative form of 'good'.", ["Gooder", "More good", "Best", "Better"], 3, "The comparative form of good is better.", "Exam-type"]
+],
+
+"Determiners": [
+["Choose the correct determiner: I have ___ umbrella.", ["a", "an", "the", "some"], 1, "An is used before a word beginning with a vowel sound.", "Easy"],
+["Choose the correct determiner: There isn't ___ milk left.", ["many", "few", "much", "several"], 2, "Much is used with uncountable nouns such as milk.", "Medium"]
+],
+
+"Clauses": [
+["Identify the subordinate clause: I stayed home because I was ill.", ["I stayed home", "Because I was ill", "I was", "Stayed home"], 1, "Because I was ill cannot stand alone as a complete sentence.", "Medium"],
+["Which clause acts as the subject? What he said surprised everyone.", ["Surprised everyone", "Everyone", "What he said", "He said"], 2, "What he said is a noun clause functioning as the subject.", "Hard"]
+],
+
+"Simple Tenses": [
+["Choose the correct simple present form: She ___ to school every day.", ["go", "goes", "going", "gone"], 1, "With he, she or it, the simple present verb usually takes -s or -es.", "Easy"],
+["Choose the correct simple past form: They ___ the match yesterday.", ["win", "wins", "won", "winning"], 2, "Won is the simple past form of win.", "Exam-type"]
+],
+
+"Continuous Tenses": [
+["Choose the correct form: They ___ football now.", ["play", "played", "are playing", "have played"], 2, "Are playing is the present continuous form.", "Easy"],
+["At 8 p.m. yesterday, I ___ my homework.", ["do", "was doing", "am doing", "have done"], 1, "Was doing describes an action in progress at a particular past time.", "Medium"]
+],
+
+"Perfect and Perfect Continuous Tenses": [
+["She ___ her homework already.", ["has completed", "complete", "is completing", "completed"], 0, "Has completed is the present perfect tense.", "Medium"],
+["They ___ for two hours before the bus arrived.", ["wait", "have waited", "had been waiting", "are waiting"], 2, "Had been waiting shows an action continuing before another past event.", "Hard"]
+],
+
+"Sequence of Tenses": [
+["Choose the correct sentence.", ["He said that he is tired.", "He said that he was tired.", "He said that he tired.", "He said that he has tired."], 1, "In reported speech, a past reporting verb commonly causes the tense to shift back.", "Medium"],
+["Choose the correct option: The teacher said that the Earth ___ around the Sun.", ["revolved", "revolves", "revolving", "revolve"], 1, "A universal truth normally remains in the simple present tense.", "Hard"]
+],
+
+"Modals": [
+["You ___ obey traffic rules.", ["might", "must", "could", "would"], 1, "Must expresses strong obligation.", "Easy"],
+["___ I borrow your pen, please?", ["May", "Must", "Should", "Would"], 0, "May is used to ask for permission politely.", "Exam-type"]
+],
+
+"Non-finite Verbs": [
+["Identify the infinitive: I want to learn French.", ["Want", "Learn", "To learn", "French"], 2, "To learn is an infinitive.", "Medium"],
+["Identify the gerund: Swimming is good exercise.", ["Is", "Good", "Exercise", "Swimming"], 3, "Swimming acts as a noun and is therefore a gerund.", "Hard"]
+],
+
+"Phrasal Verbs": [
+["What does 'give up' mean?", ["Continue", "Surrender or stop trying", "Distribute", "Collect"], 1, "Give up means to stop trying or surrender.", "Easy"],
+["Choose the correct phrasal verb: Please ___ the lights before leaving.", ["turn off", "turn into", "turn up", "turn over"], 0, "Turn off means to switch something off.", "Exam-type"]
+],
+
+"Active and Passive Voice": [
+["Choose the passive form: The chef prepared the meal.", ["The meal prepares the chef.", "The meal was prepared by the chef.", "The chef was prepared by the meal.", "The meal is preparing."], 1, "The simple past passive uses was or were + past participle.", "Medium"],
+["Choose the active form: The letter was written by Meera.", ["Meera writes the letter.", "Meera wrote the letter.", "Meera is writing the letter.", "Meera has written the letter."], 1, "The passive sentence is in the simple past, so the active form is wrote.", "Hard"]
+],
+
+"Adverbs": [
+["Identify the adverb: The tortoise walked slowly.", ["Tortoise", "Walked", "Slowly", "The"], 2, "Slowly describes how the tortoise walked.", "Easy"],
+["Which sentence uses an adverb of frequency?", ["She sings sweetly.", "He often visits us.", "They arrived yesterday.", "Come here."], 1, "Often tells how frequently he visits.", "Medium"]
+],
+
+"Prepositions": [
+["Choose the correct preposition: The cat is hiding ___ the table.", ["under", "at", "for", "with"], 0, "Under shows the position of the cat.", "Easy"],
+["Choose the correct option: She has been studying ___ Monday.", ["for", "since", "by", "from"], 1, "Since is used with a specific starting point in time.", "Exam-type"]
+],
+
+"Conjunctions": [
+["Choose the correct conjunction: I was tired, ___ I finished my work.", ["but", "because", "or", "unless"], 0, "But connects two contrasting ideas.", "Easy"],
+["Choose the correct pair: ___ you hurry, you will miss the bus.", ["If", "Unless", "Although", "Because"], 1, "Unless means if not.", "Hard"]
+],
+
+"Structure of Sentences": [
+["Identify the subject: The little girl opened the window.", ["Opened", "The window", "The little girl", "Girl opened"], 2, "The little girl is the person performing the action.", "Easy"],
+["Identify the sentence pattern: Birds fly.", ["Subject + Verb", "Subject + Object", "Subject + Verb + Object", "Subject + Complement"], 0, "Birds is the subject and fly is the verb.", "Medium"]
+],
+
+"Types of Sentences": [
+["Identify the sentence type: What a beautiful painting!", ["Assertive", "Interrogative", "Exclamatory", "Imperative"], 2, "It expresses a strong feeling and ends with an exclamation mark.", "Easy"],
+["Which sentence is imperative?", ["Where are you going?", "Please close the door.", "It is raining.", "What a surprise!"], 1, "An imperative sentence gives a command or makes a request.", "Exam-type"]
+],
+
+"Combining of Sentences": [
+["Combine using 'because': He was absent. He was ill.", ["He was absent because he was ill.", "He was ill but absent.", "He was absent or ill.", "He was absent although he was ill."], 0, "Because correctly introduces the reason for his absence.", "Medium"],
+["Choose the correct compound sentence.", ["Although it rained, we played.", "It rained, but we played.", "Playing in the rain.", "Because it rained."], 1, "A compound sentence joins independent clauses using a coordinating conjunction.", "Hard"]
+],
+
+"Direct and Indirect Speech": [
+["Choose the indirect speech: He said, 'I am happy.'", ["He said that I am happy.", "He said that he was happy.", "He says he was happy.", "He said that he is happy."], 1, "The pronoun changes to he and am changes to was.", "Medium"],
+["Change into indirect speech: She said, 'I have finished my work.'", ["She said that she has finished her work.", "She said that she had finished her work.", "She said that I had finished my work.", "She says she finished her work."], 1, "The present perfect commonly changes to the past perfect after a past reporting verb.", "Hard"]
+],
+
+"Question Tags": [
+["Choose the correct question tag: She is a doctor, ___?", ["is she", "isn't she", "doesn't she", "wasn't she"], 1, "A positive statement usually takes a negative question tag.", "Easy"],
+["Choose the correct tag: Let's go for a walk, ___?", ["will we", "do we", "shall we", "aren't we"], 2, "Let's is followed by the question tag shall we.", "Exam-type"]
+],
+
+"Punctuation": [
+["Choose the correctly punctuated sentence.", ["where are you going.", "Where are you going?", "Where are you going!", "where are you going?"], 1, "A direct question begins with a capital letter and ends with a question mark.", "Easy"],
+["Choose the correctly punctuated sentence.", ["Riya said I am ready.", "Riya said, 'I am ready.'", "Riya said 'I am ready'.", "riya said, I am ready."], 1, "The sentence uses a capital letter, a comma before the quotation and correct quotation marks.", "Hard"]
+]
+
+};
+
+// ==========================================
+// QUIZ VARIABLES
+// ==========================================
+
+let questions = [];
 let currentQuestion = 0;
 let score = 0;
 let selectedAnswer = null;
-let answered = false;
+let answerChecked = false;
 
+// ==========================================
+// SHUFFLE QUESTIONS
+// ==========================================
 
-// Set page heading
+function shuffleQuestions(list) {
+    const shuffled = [...list];
 
-topicTitle.textContent = selectedTopic;
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
 
-topicDescription.textContent =
-    `Practise ${selectedTopic} and improve your grammar skills.`;
+    return shuffled;
+}
 
+// ==========================================
+// STARTING THE QUIZ
+// ==========================================
 
-// Display question
+function startQuiz() {
+    const topicQuestions = questionBank[selectedTopic];
+
+    if (!topicQuestions || topicQuestions.length === 0) {
+        questionText.textContent = "Questions for this topic are being prepared.";
+        answerOptions.innerHTML = "";
+        return;
+    }
+
+    questions = shuffleQuestions(topicQuestions);
+    currentQuestion = 0;
+    score = 0;
+
+    scoreDisplay.textContent = "Score: 0";
+    resultCard.classList.remove("show");
+    questionCard.style.display = "block";
+
+    displayQuestion();
+}
+
+// ==========================================
+// DISPLAY QUESTION
+// ==========================================
 
 function displayQuestion() {
-
-    const question = questions[currentQuestion];
+    if (currentQuestion >= questions.length) {
+        showResults();
+        return;
+    }
 
     selectedAnswer = null;
-    answered = false;
+    answerChecked = false;
+
+    const question = questions[currentQuestion];
 
     questionNumber.textContent =
         `Question ${currentQuestion + 1} of ${questions.length}`;
 
-    scoreDisplay.textContent = `Score: ${score}`;
-
-    progressFill.style.width =
-        `${(currentQuestion / questions.length) * 100}%`;
-
-    questionText.textContent = question.question;
+    questionText.textContent = question[0];
 
     answerOptions.innerHTML = "";
 
-    feedback.className = "feedback";
-    feedback.textContent = "";
-
-    question.options.forEach((option) => {
-
+    question[1].forEach((option, index) => {
         const button = document.createElement("button");
 
         button.className = "answer-option";
         button.textContent = option;
 
         button.addEventListener("click", () => {
+            if (answerChecked) return;
 
-            if (answered) return;
+            selectedAnswer = index;
 
-            selectedAnswer = option;
-
-            document.querySelectorAll(".answer-option").forEach((item) => {
-                item.classList.remove("selected");
+            document.querySelectorAll(".answer-option").forEach(btn => {
+                btn.classList.remove("selected");
             });
 
             button.classList.add("selected");
-
         });
 
         answerOptions.appendChild(button);
-
     });
 
-    checkButton.disabled = false;
-    nextButton.disabled = true;
+    feedback.innerHTML = "";
+    feedback.style.display = "none";
 
-    nextButton.textContent =
-        currentQuestion === questions.length - 1
-            ? "See Results →"
-            : "Next Question →";
+    checkButton.style.display = "inline-block";
+    nextButton.style.display = "none";
 
+    const difficultyLabel = question[4] || "Practice";
+
+    const existingLabel = document.getElementById("difficultyLabel");
+
+    if (existingLabel) {
+        existingLabel.textContent = difficultyLabel;
+    }
+
+    progressFill.style.width =
+        `${(currentQuestion / questions.length) * 100}%`;
 }
 
-
-// Check answer
+// ==========================================
+// CHECK ANSWER
+// ==========================================
 
 checkButton.addEventListener("click", () => {
+    if (selectedAnswer === null || answerChecked) {
+        if (selectedAnswer === null) {
+            feedback.textContent = "Please select an answer first.";
+            feedback.style.display = "block";
+        }
 
-    if (answered) return;
-
-    if (selectedAnswer === null) {
-        alert("Please select an answer first!");
         return;
     }
 
-    answered = true;
+    answerChecked = true;
 
     const question = questions[currentQuestion];
+    const correctAnswer = question[2];
+    const explanation = question[3];
 
-    const isCorrect = selectedAnswer === question.answer;
+    const optionButtons = document.querySelectorAll(".answer-option");
 
-    if (isCorrect) {
-        score++;
-    }
-
-    document.querySelectorAll(".answer-option").forEach((button) => {
-
+    optionButtons.forEach((button, index) => {
         button.disabled = true;
 
-        if (button.textContent === question.answer) {
+        if (index === correctAnswer) {
             button.classList.add("correct");
         }
 
-        if (
-            button.textContent === selectedAnswer &&
-            !isCorrect
-        ) {
+        if (index === selectedAnswer && selectedAnswer !== correctAnswer) {
             button.classList.add("wrong");
         }
-
     });
 
-    feedback.className = "feedback show";
-
-    if (isCorrect) {
-
-        feedback.style.background = "#f0fdf4";
-        feedback.style.color = "#166534";
+    if (selectedAnswer === correctAnswer) {
+        score++;
 
         feedback.innerHTML =
-            `<strong>Correct!</strong><br>${question.explanation}`;
-
+            `<strong>Correct!</strong><br>${explanation}`;
     } else {
-
-        feedback.style.background = "#fef2f2";
-        feedback.style.color = "#991b1b";
-
         feedback.innerHTML =
-            `<strong>Incorrect!</strong><br>
-            Correct answer: ${question.answer}<br>
-            ${question.explanation}`;
-
+            `<strong>Not quite!</strong><br>
+            Correct answer: <strong>${question[1][correctAnswer]}</strong><br>
+            ${explanation}`;
     }
 
+    feedback.style.display = "block";
     scoreDisplay.textContent = `Score: ${score}`;
 
-    checkButton.disabled = true;
-    nextButton.disabled = false;
-
+    checkButton.style.display = "none";
+    nextButton.style.display = "inline-block";
 });
 
-
-// Next question
+// ==========================================
+// NEXT QUESTION
+// ==========================================
 
 nextButton.addEventListener("click", () => {
-
-    if (!answered) return;
-
     currentQuestion++;
 
-    if (currentQuestion < questions.length) {
+    progressFill.style.width =
+        `${(currentQuestion / questions.length) * 100}%`;
 
-        displayQuestion();
-
-    } else {
-
-        showResults();
-
-    }
-
+    displayQuestion();
 });
 
-
-// Show final result
+// ==========================================
+// SHOW FINAL RESULTS
+// ==========================================
 
 function showResults() {
-
     questionCard.style.display = "none";
     resultCard.classList.add("show");
 
@@ -325,61 +340,65 @@ function showResults() {
     finalScore.textContent =
         `${score} / ${questions.length}`;
 
-    const percentage = (score / questions.length) * 100;
+    const percentage = Math.round(
+        (score / questions.length) * 100
+    );
 
     if (percentage === 100) {
         resultMessage.textContent =
-            "Excellent! You answered every question correctly.";
-    } else if (percentage >= 70) {
+            "Excellent! You got every question correct!";
+    } else if (percentage >= 75) {
         resultMessage.textContent =
-            "Great work! Keep practising to improve further.";
-    } else if (percentage >= 40) {
+            "Great work! You have a strong understanding of this topic.";
+    } else if (percentage >= 50) {
         resultMessage.textContent =
-            "Good attempt! Revise the explanations and try again.";
+            "Good effort! Revise the explanations and try again.";
     } else {
         resultMessage.textContent =
-            "Keep learning! Regular practice will help you improve.";
+            "Keep practising. Review the lesson and give it another try!";
     }
-
 }
 
-
-// Start practice
-
 // ==========================================
-// REVISION + PRACTICE INTEGRATION
+// RETRY QUIZ
 // ==========================================
 
-const lessonSection = document.getElementById("lessonSection");
-const lessonContent = document.getElementById("lessonContent");
-const startPracticeButton = document.getElementById("startPractice");
+const retryButton = document.getElementById("retryButton");
 
-// Display revision notes
+if (retryButton) {
+    retryButton.addEventListener("click", () => {
+        startQuiz();
+    });
+}
 
-if (typeof displayLesson === "function") {
+// ==========================================
+// PAGE INITIALISATION
+// ==========================================
+
+topicTitle.textContent = selectedTopic;
+
+topicDescription.textContent =
+    "Revise the concepts and test your understanding.";
+
+if (typeof displayLesson === "function" && lessonContent) {
     lessonContent.innerHTML = displayLesson(selectedTopic);
 }
-
-// Hide quiz initially
 
 questionCard.style.display = "none";
 resultCard.classList.remove("show");
 
-// Start quiz after revision
+if (lessonSection) {
+    lessonSection.style.display = "block";
+}
 
-startPracticeButton.addEventListener("click", () => {
+if (startPracticeButton) {
+    startPracticeButton.addEventListener("click", () => {
+        if (lessonSection) {
+            lessonSection.style.display = "none";
+        }
 
-    lessonSection.style.display = "none";
-    questionCard.style.display = "block";
+        startQuiz();
+    });
+}
 
-    displayQuestion();
-
-});
-
-// Start with revision
-
-lessonSection.style.display = "block";
-
-console.log("Revision and Practice System Ready");
-
-console.log("Grammar Hub Practice Engine Loaded");
+console.log("Grammar Hub Practice System Ready!");
