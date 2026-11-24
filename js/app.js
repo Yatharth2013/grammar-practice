@@ -107,11 +107,8 @@ topicSearch.addEventListener("input", function () {
 // Open Selected Topic
 
 function openTopic(topic) {
-
-    alert(
-        `${topic}\n\nTopic practice will be available in the next development phase!`
-    );
-
+    window.location.href =
+        `practice.html?topic=${encodeURIComponent(topic)}`;
 }
 
 
