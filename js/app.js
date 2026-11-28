@@ -1,9 +1,9 @@
 
-// ======================================
-// GRAMMAR HUB - MAIN JAVASCRIPT
-// ======================================
-
-// All 23 Grammar Topics
+/* =========================================
+   GRAMMARHUB - TOPIC SYSTEM
+   Developed by AirOne Developer
+   Yatharth Ukey
+========================================= */
 
 const topics = [
     "Parts of Speech",
@@ -31,101 +31,89 @@ const topics = [
     "Punctuation"
 ];
 
-
-// Get HTML elements
+const topicDescriptions = {
+    "Parts of Speech": "Understand the different categories of words.",
+    "Nouns": "Learn types, forms and uses of nouns.",
+    "Pronouns": "Practise different types of pronouns.",
+    "Adjectives": "Learn describing words and their degrees.",
+    "Determiners": "Understand articles, quantifiers and demonstratives.",
+    "Clauses": "Explore independent and dependent clauses.",
+    "Simple Tenses": "Master simple present, past and future.",
+    "Continuous Tenses": "Practise continuous tense forms.",
+    "Perfect and Perfect Continuous Tenses": "Understand perfect and perfect continuous forms.",
+    "Sequence of Tenses": "Learn how tenses work together.",
+    "Modals": "Practise can, could, may, might and more.",
+    "Non-finite Verbs": "Explore infinitives, gerunds and participles.",
+    "Phrasal Verbs": "Learn common phrasal verbs and meanings.",
+    "Active and Passive Voice": "Transform sentences between active and passive voice.",
+    "Adverbs": "Understand types and uses of adverbs.",
+    "Prepositions": "Practise prepositions of time, place and direction.",
+    "Conjunctions": "Connect words, phrases and clauses.",
+    "Structure of Sentences": "Understand sentence structures.",
+    "Types of Sentences": "Identify different kinds of sentences.",
+    "Combining of Sentences": "Learn to combine sentences correctly.",
+    "Direct and Indirect Speech": "Practise reported speech.",
+    "Question Tags": "Master question tags and their rules.",
+    "Punctuation": "Improve punctuation and sentence clarity."
+};
 
 const topicGrid = document.getElementById("topicGrid");
-const topicSearch = document.getElementById("topicSearch");
-const topicCount = document.getElementById("topicCount");
-const noResults = document.getElementById("noResults");
-const teacherBtn = document.getElementById("teacherBtn");
 
+function displayTopics() {
 
-// Display Topics
-
-function displayTopics(topicList) {
+    if (!topicGrid) {
+        console.error("ERROR: topicGrid element was not found.");
+        return;
+    }
 
     topicGrid.innerHTML = "";
 
-    topicList.forEach((topic) => {
-
-        const originalNumber = topics.indexOf(topic) + 1;
+    topics.forEach((topic, index) => {
 
         const card = document.createElement("div");
         card.className = "topic-card";
 
-        const number = document.createElement("span");
-        number.className = "topic-number";
-        number.textContent = `TOPIC ${String(originalNumber).padStart(2, "0")}`;
-
         const heading = document.createElement("h3");
-        heading.textContent = topic;
+        heading.textContent = `${String(index + 1).padStart(2, "0")}. ${topic}`;
 
-        const link = document.createElement("a");
-        link.href = "#";
-        link.textContent = "Start Practising →";
+        const description = document.createElement("p");
+        description.textContent = topicDescriptions[topic] || "Revise and practise this grammar topic.";
 
-        link.addEventListener("click", (event) => {
-            event.preventDefault();
+        const button = document.createElement("button");
+        button.type = "button";
+        button.textContent = "Revise & Practise →";
+
+        button.addEventListener("click", () => {
             openTopic(topic);
         });
 
-        card.appendChild(number);
+        card.addEventListener("click", (event) => {
+            if (event.target !== button) {
+                openTopic(topic);
+            }
+        });
+
         card.appendChild(heading);
-        card.appendChild(link);
+        card.appendChild(description);
+        card.appendChild(button);
 
         topicGrid.appendChild(card);
-
     });
 
-    // Update topic count
-
-    topicCount.textContent =
-        `${topicList.length} of ${topics.length} Topics Available`;
-
-    // Show or hide no-results message
-
-    noResults.hidden = topicList.length !== 0;
+    console.log("GrammarHub: All 23 topics displayed successfully.");
 }
-
-
-// Search Topics
-
-topicSearch.addEventListener("input", function () {
-
-    const searchText = this.value.toLowerCase().trim();
-
-    const filteredTopics = topics.filter((topic) =>
-        topic.toLowerCase().includes(searchText)
-    );
-
-    displayTopics(filteredTopics);
-
-});
-
-
-// Open Selected Topic
 
 function openTopic(topic) {
     window.location.href =
         `practice.html?topic=${encodeURIComponent(topic)}`;
 }
 
+const teacherButton = document.getElementById("teacherButton");
 
-// Teacher's Corner
+if (teacherButton) {
+    teacherButton.addEventListener("click", () => {
+        alert("Teacher tools and Word document question-paper uploads are coming soon!");
+    });
+}
 
-teacherBtn.addEventListener("click", function () {
-
-    alert(
-        "Teacher's Corner\n\nWord document upload and classroom quiz creation will be added in a later phase."
-    );
-
-});
-
-
-// Initialize Website
-
-displayTopics(topics);
-
-console.log("Grammar Hub loaded successfully!");
-console.log(`${topics.length} grammar topics available.`);
+displayTopics();
