@@ -4,164 +4,209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#101b3d">
 
-    <title>Grammar Hub | English Grammar Practice</title>
+    <meta name="description" content="GrammarHub - Free English Grammar Practice and Revision for students.">
+    <meta name="author" content="AirOne Developer - Yatharth Ukey">
 
-    <meta name="description" content="Improve your English grammar with interactive practice, revision and quizzes across 23 grammar topics.">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>GrammarHub | English Grammar Practice</title>
 
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .developer-credit {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 12px;
+            color: #64708b;
+            white-space: nowrap;
+        }
+
+        .developer-credit strong {
+            color: #2456d8;
+            font-weight: 700;
+        }
+
+        .developer-credit .credit-symbol {
+            color: #2456d8;
+            font-size: 15px;
+        }
+
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        @media(max-width: 600px) {
+            .developer-credit {
+                width: 100%;
+                justify-content: center;
+                padding-bottom: 10px;
+                font-size: 11px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- NAVIGATION -->
+    <!-- NAVIGATION BAR -->
+
     <header class="navbar">
+        <div class="container">
 
-        <a href="#" class="logo">GrammarHub.</a>
+            <a href="index.html" class="logo">
+                Grammar<span>Hub</span>
+            </a>
 
-        <nav class="nav-links">
-            <a href="#">Home</a>
-            <a href="#topics">Topics</a>
-            <a href="#teacher">Teacher's Corner</a>
-            <a href="#topics" class="btn btn-primary">Start Practising</a>
-        </nav>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="#topics">Topics</a>
+                <a href="#about">About</a>
+            </nav>
 
+            <div class="developer-credit">
+                <span class="credit-symbol">©</span>
+                <span>Developed by <strong>AirOne Developer</strong></span>
+                <span>·</span>
+                <strong>Yatharth Ukey</strong>
+            </div>
+
+        </div>
     </header>
 
 
     <!-- HERO SECTION -->
-    <main>
 
-        <section class="hero">
+    <section class="hero">
+        <div class="container">
 
             <h1>
-                Master English.<br>
-                <span>One Topic at a Time.</span>
+                Master English Grammar with
+                <span>GrammarHub</span>
             </h1>
 
             <p>
-                Build your grammar skills with structured practice,
-                clear explanations and interactive questions.
-                Learn at your own pace, from beginner to advanced.
+                Learn grammar concepts, revise important rules
+                and practise with challenging questions.
             </p>
 
-            <div class="hero-buttons">
+            <a href="#topics" class="primary-button">
+                Explore Grammar Topics →
+            </a>
 
-                <a href="#topics" class="btn btn-primary">
-                    Explore Topics →
-                </a>
+        </div>
+    </section>
 
-                <a href="#teacher" class="btn btn-outline">
-                    Teacher's Corner
-                </a>
 
-            </div>
+    <!-- STATS SECTION -->
 
-            <div class="hero-stats">
+    <section class="stats">
+        <div class="container">
 
-                <div class="stat">
-                    <h3>23</h3>
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <h2>23</h2>
                     <p>Grammar Topics</p>
                 </div>
 
-                <div class="stat">
-                    <h3>100+</h3>
-                    <p>Questions per Topic</p>
+                <div class="stat-card">
+                    <h2>Free</h2>
+                    <p>Learning Access</p>
                 </div>
 
-                <div class="stat">
-                    <h3>Free</h3>
-                    <p>For Everyone</p>
+                <div class="stat-card">
+                    <h2>100+</h2>
+                    <p>Question Target per Topic</p>
                 </div>
 
             </div>
 
-        </section>
+        </div>
+    </section>
 
 
-        <!-- TOPICS SECTION -->
-        <section class="section" id="topics">
+    <!-- TOPICS SECTION -->
+
+    <section class="topics-section" id="topics">
+
+        <div class="container">
 
             <div class="section-heading">
-
                 <h2>Explore Grammar Topics</h2>
-
-                <p>
-                    Choose a topic and start improving your English grammar.
-                </p>
-
+                <p>Select a topic to revise and practise.</p>
             </div>
 
-            <div class="search-container">
-
+            <div class="search-box">
                 <input
                     type="text"
                     id="topicSearch"
                     placeholder="Search grammar topics..."
-                    autocomplete="off"
-                >
-
+                    aria-label="Search grammar topics">
             </div>
 
-            <p id="topicCount">23 Topics Available</p>
-
-            <div class="topic-grid" id="topicGrid">
-
-                <!-- Topic cards will be added using JavaScript -->
-
+            <div class="topics-grid" id="topicGrid">
+                <!-- Topics loaded through app.js -->
             </div>
 
-            <p id="noResults" hidden>
-                No topics found. Try another search.
+        </div>
+
+    </section>
+
+
+    <!-- TEACHER SECTION -->
+
+    <section class="teacher-section" id="about">
+
+        <div class="container">
+
+            <h2>For Teachers</h2>
+
+            <p>
+                Bring your own question papers and create
+                classroom quizzes and interactive tests.
             </p>
 
-        </section>
+            <button id="teacherButton" class="primary-button">
+                Teacher Tools
+            </button>
 
+        </div>
 
-        <!-- TEACHER SECTION -->
-        <section class="section teacher-section" id="teacher">
-
-            <div class="teacher-box">
-
-                <h2>Bring Your Own Questions!</h2>
-
-                <p>
-                    Teachers can use their own question papers to
-                    create classroom grammar quizzes and practice tests.
-                    More features coming soon.
-                </p>
-
-                <button class="btn btn-primary" id="teacherBtn">
-                    Explore Teacher's Corner →
-                </button>
-
-            </div>
-
-        </section>
-
-    </main>
+    </section>
 
 
     <!-- FOOTER -->
+
     <footer class="footer">
 
-        <p>
-            © 2026 Grammar Hub. Learn English. Improve Every Day.
-        </p>
+        <div class="container">
 
-        <p>
-            Free English Grammar Practice for Everyone.
-        </p>
+            <h3>GrammarHub</h3>
+
+            <p>
+                Learn Grammar. Practise. Improve.
+            </p>
+
+            <p class="footer-credit">
+                © 2026 GrammarHub. All rights reserved.
+            </p>
+
+            <p class="footer-credit">
+                Developed by <strong>AirOne Developer</strong>
+                · Yatharth Ukey
+            </p>
+
+        </div>
 
     </footer>
 
 
-    <!-- JAVASCRIPT -->
     <script src="js/app.js"></script>
 
 </body>
