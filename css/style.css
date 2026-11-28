@@ -218,28 +218,7 @@ button {
     color: #64708b;
 }
 
-/* SEARCH */
 
-.search-box {
-    max-width: 550px;
-    margin: 0 auto 35px;
-}
-
-.search-box input {
-    width: 100%;
-    padding: 16px 20px;
-    border: 1px solid #dce2ef;
-    border-radius: 11px;
-    outline: none;
-    background: white;
-    font-size: 15px;
-    transition: 0.2s;
-}
-
-.search-box input:focus {
-    border-color: #3867e8;
-    box-shadow: 0 0 0 3px rgba(56, 103, 232, 0.1);
-}
 
 /* TOPIC CARDS */
 
