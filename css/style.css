@@ -650,3 +650,59 @@ button {
     }
 
 }
+
+/* CLEAR ANSWER FEEDBACK */
+
+.answer-option.correct {
+    background: #dcfce7 !important;
+    border: 2px solid #16a34a !important;
+    color: #14532d !important;
+    font-weight: 700;
+}
+
+.answer-option.incorrect {
+    background: #fee2e2 !important;
+    border: 2px solid #dc2626 !important;
+    color: #991b1b !important;
+    font-weight: 700;
+}
+
+.answer-result {
+    padding: 18px;
+    margin-top: 15px;
+    border-radius: 12px;
+    border: 2px solid;
+}
+
+.success-result {
+    background: #f0fdf4;
+    border-color: #16a34a;
+    color: #166534;
+}
+
+.error-result {
+    background: #fef2f2;
+    border-color: #dc2626;
+    color: #991b1b;
+}
+
+.result-heading {
+    font-size: 19px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.explanation-box,
+.correct-answer-box {
+    background: rgba(255,255,255,0.85);
+    padding: 12px;
+    margin-top: 12px;
+    border-radius: 8px;
+    color: #1e293b;
+}
+
+.explanation-box p,
+.correct-answer-box p {
+    margin: 6px 0 0;
+    line-height: 1.6;
+}
