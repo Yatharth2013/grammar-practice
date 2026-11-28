@@ -431,6 +431,7 @@ function displayQuestion() {
    CHECK ANSWER
 ========================================= */
 
+
 function checkAnswer() {
     if (selectedAnswer === null || answerChecked) return;
 
@@ -444,43 +445,58 @@ function checkAnswer() {
 
         if (index === question.a) {
             button.classList.add("correct");
+            button.innerHTML =
+                `✓ ${question.o[index]} <strong>— CORRECT</strong>`;
         }
 
         if (index === selectedAnswer && selectedAnswer !== question.a) {
             button.classList.add("incorrect");
+            button.innerHTML =
+                `✕ ${question.o[index]} <strong>— YOUR ANSWER</strong>`;
         }
     });
 
     if (selectedAnswer === question.a) {
         score++;
 
-        if (feedback) {
-            feedback.innerHTML =
-                `<strong>Correct!</strong><br>${question.e}`;
-            feedback.className = "feedback correct-feedback";
-        }
+        feedback.innerHTML = `
+            <div class="answer-result success-result">
+                <div class="result-heading">✓ CORRECT ANSWER!</div>
+                <p>Excellent work! You selected the right answer.</p>
+                <div class="explanation-box">
+                    <strong>Explanation:</strong>
+                    <p>${question.e}</p>
+                </div>
+            </div>
+        `;
     } else {
-        if (feedback) {
-            feedback.innerHTML =
-                `<strong>Incorrect.</strong><br>
-                Correct answer: ${question.o[question.a]}<br>
-                ${question.e}`;
-            feedback.className = "feedback incorrect-feedback";
-        }
+        feedback.innerHTML = `
+            <div class="answer-result error-result">
+                <div class="result-heading">✕ INCORRECT ANSWER</div>
+                <p>Don't worry! Learn from this mistake.</p>
+                <div class="correct-answer-box">
+                    <strong>✓ Correct answer:</strong>
+                    <p>${question.o[question.a]}</p>
+                </div>
+                <div class="explanation-box">
+                    <strong>Explanation:</strong>
+                    <p>${question.e}</p>
+                </div>
+            </div>
+        `;
     }
 
+    feedback.className = "feedback";
     if (scoreDisplay) {
         scoreDisplay.textContent = `Score: ${score}`;
     }
 
-    if (checkButton) checkButton.style.display = "none";
-    if (nextButton) {
-        nextButton.style.display = "inline-block";
-        nextButton.textContent =
-            currentQuestion === questions.length - 1
-                ? "See Results"
-                : "Next Question →";
-    }
+    checkButton.style.display = "none";
+    nextButton.style.display = "inline-block";
+    nextButton.textContent =
+        currentQuestion === questions.length - 1
+            ? "See Results"
+            : "Next Question →";
 }
 
 /* =========================================
